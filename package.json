@@ -5,7 +5,9 @@
   "main": "index.js",
   "scripts": {
     "build": "webpack",
-    "test": "standard",
+    "cover": "nyc --reporter=lcov --reporter=text --reporter=html --require babel-register --extension .jsx npm test",
+    "lint": "standard",
+    "test": "mocha --require test/helpers/setup.js",
     "watch": "webpack --watch"
   },
   "author": "Brian Holt <btholt@gmail.com>",
