@@ -6,4 +6,10 @@ const Layout = (props) => (
   </div>
 )
 
-module.exports = Layout;
+const { element } = React.PropTypes
+
+Layout.propTypes = {
+  children: element.isRequired
+}
+
+module.exports = Layout
