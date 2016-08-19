@@ -1,11 +1,13 @@
 const React = require('react')
 const ReactDOM = require('react-dom')
+const { IndexRoute, Router, Route, hashHistory } = require('react-router')
+const { Provider } = require('react-redux')
 const Details = require('./details')
 const Landing = require('./Landing')
 const Layout = require('./Layout')
 const Search = require('./Search')
-const { IndexRoute, Router, Route, hashHistory } = require('react-router')
 const { shows } = require('../public/data')
+const { store } = require('./Store')
 
 const App = React.createClass({
   assignShow (nextState, replace) {
@@ -19,13 +21,15 @@ const App = React.createClass({
   },
   render () {
     return (
-      <Router history={hashHistory}>
-        <Route path='/' component={Layout}>
-          <IndexRoute component={Landing} />
-          <Route path='/search' component={Search} shows={shows} />
-          <Route path='/details/:id' component={Details} onEnter={this.assignShow} />
-        </Route>
-      </Router>
+      <Provider store={store}>
+        <Router history={hashHistory}>
+          <Route path='/' component={Layout}>
+            <IndexRoute component={Landing} />
+            <Route path='/search' component={Search} shows={shows} />
+            <Route path='/details/:id' component={Details} onEnter={this.assignShow} />
+          </Route>
+        </Router>
+      </Provider>
     )
   }
 })
